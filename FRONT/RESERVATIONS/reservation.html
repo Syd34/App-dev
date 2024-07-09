@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="styles_reservation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <label class="logo">
+            <img src="../img/Rach Billiards.png" alt="Rach Billiards">
+        </label>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="material-icons">menu</i>
+        </label>
+        <ul>
+            <li><a href="../HOME/home.html">Home</a></li>
+            <li><a href="../RESERVATIONS/reservation.html" class="active">Reservations</a></li>
+            <li><a href="../ACCOUNT/account.html">Sign-in</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Choose Your Table</h1>
+        <div class="tables">
+            <div class="table">
+                <h2>Table 1</h2>
+                <div class="timer" id="timer1">Time left: 2 hours</div>
+                <button>Reserve Table 1</button>
+            </div>
+            <div class="table">
+                <h2>Table 2</h2>
+                <div class="timer" id="timer2">Time left: 1.5 hours</div>
+                <button>Reserve Table 2</button>
+            </div>
+            <div class="table">
+                <h2>Table 3</h2>
+                <div class="timer" id="timer3">Time left: 1 hour</div>
+                <button>Reserve Table 3</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+        function startTimer(timerId, hoursLeft) {
+            const timerElement = document.getElementById(timerId);
+            let totalTime = hoursLeft * 60 * 60; 
+            setInterval(() => {
+                if (totalTime <= 0) {
+                    timerElement.textContent = "Time left: 0 hours";
+                    return;
+                }
+
+                totalTime -= 1;
+                const hours = Math.floor(totalTime / 3600);
+                const minutes = Math.floor((totalTime % 3600) / 60);
+                const seconds = totalTime % 60;
+
+                timerElement.textContent = `Time left: ${hours} hours ${minutes} minutes ${seconds} seconds`;
+            }, 1000);
+        }
+
+        startTimer("timer1", 2);  // Example: 2 hours left for Table 1
+        startTimer("timer2", 1.5); // Example: 1.5 hours left for Table 2
+        startTimer("timer3", 1);   // Example: 1 hour left for Table 3
+    </script>
+</body>
+</html>
