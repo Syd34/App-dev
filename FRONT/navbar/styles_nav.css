@@ -9,6 +9,7 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  padding-top: 80px; 
 }
 
 nav {
@@ -18,38 +19,27 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
 }
 
-.logo {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 40px;
-  line-height: 80px;
-  padding: 0 60px;
-  font-weight: bold;
-  letter-spacing: -3px;
-}
-
-.red {
-  color: red;
-}
-
-.white {
-  color: white;
-}
-
-.blue {
-  color: #0f52ba;
+.logo img {
+  height: 60px;
+  width: auto;
 }
 
 nav ul {
-  float: right;
+  display: flex;
+  list-style: none;
   margin-right: 20px;
 }
 
 nav ul li {
-  display: inline-block;
   line-height: 80px;
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 nav ul li a {
@@ -69,9 +59,8 @@ a:hover {
 .checkbtn {
   font-size: 30px;
   color: white;
-  float: right;
-  line-height: 80px;
-  margin-right: 40px;
+  display: none;
+  cursor: pointer;
 }
 
 #check {
@@ -79,9 +68,8 @@ a:hover {
 }
 
 @media (max-width: 952px) {
-  .logo {
-    font-size: 30px;
-    padding-left: 50px;
+  .logo img {
+    height: 50px;
   }
 
   nav ul li a {
@@ -103,6 +91,7 @@ a:hover {
     left: -100%;
     text-align: center;
     transition: all 0.5s;
+    flex-direction: column;
   }
 
   nav ul li {
