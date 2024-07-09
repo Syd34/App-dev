@@ -1,6 +1,5 @@
 <?php
-include_once '..config/db_config.php';
-
+include_once '../config/db_config.php';
 
 function getConnection() {
     global $conn;
