@@ -260,6 +260,15 @@ h1 {
     background-color: #c0392b;
 }
 
+#loginMessage p a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+#loginMessage p a:hover {
+    text-decoration: underline;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../BACK/includes/db_connection.php';
+include_once '../../BACK/includes/db_connection.php';
 
 $isLoggedIn = isset($_SESSION['username']);
 $username = $isLoggedIn ? $_SESSION['username'] : '';
