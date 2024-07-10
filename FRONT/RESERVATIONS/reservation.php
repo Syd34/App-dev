@@ -1,3 +1,11 @@
+<?php
+session_start();
+include_once '../../BACK/includes/db_connection.php';
+
+$isLoggedIn = isset($_SESSION['username']);
+$username = $isLoggedIn ? $_SESSION['username'] : '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +26,22 @@
             <i class="material-icons">menu</i>
         </label>
         <ul>
-            <li><a href="../HOME/home.html">Home</a></li>
-            <li><a href="../reservations.html" class="active">Reservations</a></li>
-            <li><a href="../ACCOUNT/account.html">Sign-in</a></li>
+            <li><a href="../HOME/home.php">Home</a></li>
+            <li><a href="../RESERVATIONS/reservation.php" class="active">Reservations</a></li>
+            <li class="account-dropdown">
+                <a href="#" id="accountButton"><?php echo $isLoggedIn ? 'Profile' : 'Account'; ?></a>
+                <div class="dropdown-content" id="accountDropdown">
+                    <?php
+                    if ($isLoggedIn) {
+                        echo "<a href='#'>Welcome, $username</a>";
+                        echo "<a href='../../BACK/scripts/logout.php'>Logout</a>";
+                    } else {
+                        echo "<a href='../ACCOUNT/account.html#signin-form'>Login</a>";
+                        echo "<a href='../ACCOUNT/account.html#signup-form'>Create Account</a>";
+                    }
+                    ?>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -66,6 +87,24 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let accountButton = document.getElementById('accountButton');
+            let accountDropdown = document.getElementById('accountDropdown');
+
+            accountButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                accountDropdown.classList.toggle('show');
+            });
+
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('#accountButton')) {
+                    if (accountDropdown.classList.contains('show')) {
+                        accountDropdown.classList.remove('show');
+                    }
+                }
+            });
+        });
+
         function showForm(tableId) {
             document.getElementById('reservationForm').style.display = 'block';
             document.getElementById('form').dataset.table = tableId;
@@ -79,14 +118,14 @@
             const hours = document.getElementById('hours').value;
             const price = hours * 100;
             document.getElementById('priceDisplay').innerText = `Total Price: ₱${price}`;
-            document.getElementById('reservationPrice').innerText = `Total Price: ₱${price}`; // Display price in the message
+            document.getElementById('reservationPrice').innerText = `Total Price: ₱${price}`; 
             document.getElementById('reservationForm').style.display = 'none';
-            document.getElementById('reservationMessage').style.display = 'block'; // Show the message container
-            return false; // Prevent form submission
+            document.getElementById('reservationMessage').style.display = 'block'; 
+            return false; 
         }
 
         function closeMessage() {
-            document.getElementById('reservationMessage').style.display = 'none'; // Hide the message container
+            document.getElementById('reservationMessage').style.display = 'none'; 
         }
 
         function startTimer(timerId, hoursLeft) {
