@@ -9,3 +9,15 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 --==================================================================
+
+CREATE TABLE reservations (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    table_id VARCHAR(10) NOT NULL,
+    reservation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    hours INT NOT NULL,
+    minutes INT NOT NULL,
+    end_time TIMESTAMP GENERATED ALWAYS AS (
+        reservation_time + INTERVAL hours HOUR + INTERVAL minutes MINUTE
+    ) STORED
+);
